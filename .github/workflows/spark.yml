@@ -1,10 +1,10 @@
 name: spark
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+  # push:
+  #   branches: [ "master" ]
+  # pull_request:
+  #   branches: [ "master" ]
   repository_dispatch:
     types: [spark]
 jobs:
@@ -29,9 +29,11 @@ jobs:
         spark-version: '3.5.3'
         hadoop-version: '3'
 
-    - run: spark-submit --version
-    - run: spark-submit --master local hello.py
+    # - run: spark-submit --version
+    - run: wget -O dataset.csv https://raw.githubusercontent.com/adsoftsito/bigdata/refs/heads/main/datasets/people.csv   
     - run: ls -la 
+    - run: spark-submit --master local hello.py
+
     
     - name: GIT commit and push docs
       env: 
